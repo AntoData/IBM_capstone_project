@@ -156,7 +156,7 @@ headers = {
 # First, let's perform an HTTP GET method to request the Falcon9 Launch HTML page, as an HTTP response.
 # 
 
-# In[20]:
+# In[5]:
 
 
 # use requests.get() method with the provided static_url and headers
@@ -171,7 +171,7 @@ response = requests.get(static_url, headers=headers_)
 # Create a `BeautifulSoup` object from the HTML `response`
 # 
 
-# In[21]:
+# In[6]:
 
 
 # Use BeautifulSoup() to create a BeautifulSoup object from a response text content
@@ -181,7 +181,7 @@ parsed_html = BeautifulSoup(response.text, 'html.parser')
 # Print the page title to verify if the `BeautifulSoup` object was created properly 
 # 
 
-# In[22]:
+# In[7]:
 
 
 # Use soup.title attribute
@@ -198,7 +198,7 @@ print(title)
 # Let's try to find all tables on the wiki page first. If you need to refresh your memory about `BeautifulSoup`, please check the external reference link towards the end of this lab
 # 
 
-# In[23]:
+# In[8]:
 
 
 # Use the find_all function in the BeautifulSoup object, with element type `table`
@@ -209,7 +209,7 @@ html_tables = parsed_html.find_all('table')
 # Starting from the third table is our target table contains the actual launch records.
 # 
 
-# In[25]:
+# In[9]:
 
 
 # Let's print the third table and check its content
@@ -248,7 +248,7 @@ print(first_launch_table)
 # Next, we just need to iterate through the `<th>` elements and apply the provided `extract_column_from_header()` to extract column name one by one
 # 
 
-# In[26]:
+# In[10]:
 
 
 column_names = []
@@ -265,7 +265,7 @@ for element_th in first_launch_table.find_all('th'):
 # Check the extracted column names
 # 
 
-# In[27]:
+# In[11]:
 
 
 print(column_names)
@@ -277,7 +277,7 @@ print(column_names)
 # We will create an empty dictionary with keys from the extracted column names in the previous task. Later, this dictionary will be converted into a Pandas dataframe
 # 
 
-# In[28]:
+# In[12]:
 
 
 launch_dict= dict.fromkeys(column_names)
@@ -309,7 +309,7 @@ launch_dict['Time']=[]
 # To simplify the parsing process, we have provided an incomplete code snippet below to help you to fill up the `launch_dict`. Please complete the following code snippet with TODOs or you can choose to write your own logic to parse all launch tables:
 # 
 
-# In[33]:
+# In[13]:
 
 
 extracted_row = 0
@@ -405,7 +405,7 @@ for table_number,table in enumerate(parsed_html.find_all('table',"wikitable plai
 # After you have fill in the parsed launch record values into `launch_dict`, you can create a dataframe from it.
 # 
 
-# In[ ]:
+# In[14]:
 
 
 df= pd.DataFrame({ key:pd.Series(value) for key, value in launch_dict.items() })
