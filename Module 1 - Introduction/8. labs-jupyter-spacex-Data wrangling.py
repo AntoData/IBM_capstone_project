@@ -52,7 +52,7 @@
 # Install the below libraries
 # 
 
-# In[2]:
+# In[1]:
 
 
 get_ipython().system('pip install pandas')
@@ -65,7 +65,7 @@ get_ipython().system('pip install numpy')
 # We will import the following libraries.
 # 
 
-# In[3]:
+# In[2]:
 
 
 # Pandas is a software library written for the Python programming language for data manipulation and analysis.
@@ -80,7 +80,7 @@ import numpy as np
 # Load Space X dataset, from last section.
 # 
 
-# In[4]:
+# In[3]:
 
 
 df=pd.read_csv("https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-DS0321EN-SkillsNetwork/datasets/dataset_part_1.csv")
@@ -90,7 +90,7 @@ df.head(10)
 # Identify and calculate the percentage of the missing values in each attribute
 # 
 
-# In[5]:
+# In[4]:
 
 
 df.isnull().sum()/len(df)*100
@@ -99,7 +99,7 @@ df.isnull().sum()/len(df)*100
 # Identify which columns are numerical and categorical:
 # 
 
-# In[6]:
+# In[5]:
 
 
 df.dtypes
@@ -115,7 +115,7 @@ df.dtypes
 # Use the method  <code>value_counts()</code> on the column <code>LaunchSite</code> to determine the number of launches  on each site: 
 # 
 
-# In[8]:
+# In[6]:
 
 
 # Apply value_counts() on column LaunchSite
@@ -174,7 +174,7 @@ df['LaunchSite'].value_counts()
 # Note: Do not count GTO, as it is a transfer orbit and not itself geostationary.
 # 
 
-# In[9]:
+# In[7]:
 
 
 # Apply value_counts on Orbit column
@@ -187,7 +187,7 @@ df[df['Orbit'] != 'GTO']['Orbit'].value_counts()
 # Use the method <code>.value_counts()</code> on the column <code>Outcome</code> to determine the number of <code>landing_outcomes</code>.Then assign it to a variable landing_outcomes.
 # 
 
-# In[11]:
+# In[8]:
 
 
 # landing_outcomes = values on Outcome column
@@ -198,7 +198,7 @@ landing_outcomes
 # <code>True Ocean</code> means the mission outcome was successfully  landed to a specific region of the ocean while <code>False Ocean</code> means the mission outcome was unsuccessfully landed to a specific region of the ocean. <code>True RTLS</code> means the mission outcome was successfully  landed to a ground pad <code>False RTLS</code> means the mission outcome was unsuccessfully landed to a ground pad.<code>True ASDS</code> means the mission outcome was successfully  landed to a drone ship <code>False ASDS</code> means the mission outcome was unsuccessfully landed to a drone ship. <code>None ASDS</code> and <code>None None</code> these represent a failure to land.
 # 
 
-# In[12]:
+# In[9]:
 
 
 for i,outcome in enumerate(landing_outcomes.keys()):
@@ -208,7 +208,7 @@ for i,outcome in enumerate(landing_outcomes.keys()):
 # We create a set of outcomes where the second stage did not land successfully:
 # 
 
-# In[13]:
+# In[10]:
 
 
 bad_outcomes=set(landing_outcomes.keys()[[1,3,5,6,7]])
@@ -221,7 +221,7 @@ bad_outcomes
 # Using the <code>Outcome</code>,  create a list where the element is zero if the corresponding  row  in  <code>Outcome</code> is in the set <code>bad_outcome</code>; otherwise, it's one. Then assign it to the variable <code>landing_class</code>:
 # 
 
-# In[14]:
+# In[11]:
 
 
 # landing_class = 0 if bad_outcome
@@ -233,14 +233,14 @@ landing_class
 # This variable will represent the classification variable that represents the outcome of each launch. If the value is zero, the  first stage did not land successfully; one means  the first stage landed Successfully 
 # 
 
-# In[15]:
+# In[12]:
 
 
 df['Class']=landing_class
 df[['Class']].head(8)
 
 
-# In[16]:
+# In[13]:
 
 
 df.head(5)
@@ -249,7 +249,7 @@ df.head(5)
 # We can use the following line of code to determine  the success rate:
 # 
 
-# In[17]:
+# In[14]:
 
 
 df["Class"].mean()
